@@ -1,6 +1,21 @@
-# AI Customer Support Assistant (Branin.v2 Console)
+# AI Customer Support Assistant 
 
-This repository contains an end-to-end implementation of an automated customer support system. It features a high-fidelity **SvelteKit** landing page inspired by the premium dark-amber aesthetic of Branin V2 and is backed by a modular **Express (TypeScript)** server utilizing the ultra-fast **Cerebras API** framework.
+# Spur AI Live Chat Agent
+
+This repository contains a production-minded implementation of an AI-powered customer support platform built as part of the Spur Founding Full-Stack Engineer assignment.
+
+The application simulates a real-world customer support workflow where users can interact with an AI support agent through a modern chat interface. Conversations are persisted, contextualized with domain-specific knowledge, and answered using a Large Language Model (LLM).
+
+## Features
+
+- Real-time AI-powered customer support chat
+- Conversation and message persistence using Prisma
+- Context-aware responses using conversation history
+- Domain knowledge integration for store FAQs
+- Session-based conversation management
+- Input validation and error handling
+- Graceful recovery from LLM failures
+- Clean, responsive chat experience
 
 ---
 
@@ -162,4 +177,4 @@ We use a clean relational structure to handle user sessions and message historie
 *   *Future Scale:* Since we use Prisma, transitioning our schema to a production-grade PostgreSQL cluster simply requires changing the `provider` line in our `schema.prisma` file. This transition would support high-concurrency connection pools.
 
 ### 3. Tool Calling / Function Integrations (Actionable Agents)
-*   *If I Had More Time...* We would implement structured JSON tool calling (function declarations) through Cerebras. This would allow our automated assistant to recognize order-tracking inquiries (e.g., *"Where is order #2035?"*) and query active Shopify or Zoho storefront endpoints directly to return live shipping data, rather than just explaining the general shipping policies.
+* We would implement structured JSON tool calling (function declarations) through Cerebras. This would allow our automated assistant to recognize order-tracking inquiries (e.g., *"Where is order #2035?"*) and query active Shopify or Zoho storefront endpoints directly to return live shipping data, rather than just explaining the general shipping policies.
