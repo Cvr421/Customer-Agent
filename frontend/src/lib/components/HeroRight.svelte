@@ -107,7 +107,7 @@
           on:click={onCardClick}
           class="px-4 py-1.5 bg-white text-black hover:bg-slate-200 text-xs font-bold rounded-full transition-all shadow-md active:scale-95"
         >
-          Try Now
+         Customer Agent
         </button>
       </div>
     </div>

@@ -117,26 +117,56 @@
     globalError = null;
   }
 
-// A safe, lightweight parser to render bold text and list bullets cleanly
-  function formatMessageText(text: string): string {
+// Premium, safe markdown-to-HTML parser matching ChatGPT's design elements
+  function parseMarkdown(text: string): string {
     if (!text) return '';
-    
-    // 1. Escape HTML entities to prevent XSS injection
-    let clean = text
+
+    // 1. Escape HTML entities first to protect against XSS injection
+    let html = text
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;');
-    
-    // 2. Parse bold markers: **text** -> <strong>text</strong>
-    // We style the bold headers with our branding amber color to stand out elegantly.
-    clean = clean.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
-    
-    // 3. Highlight lists and policies: replace bullet dash characters with styled indicators
-    clean = clean.replace(/^ - /gm, ' • ');
-    
-    return clean;
-  }
 
+    // 2. Parse inline code/string blocks: `string` -> stylized monospaced capsules
+    html = html.replace(/`(.*?)`/g, '<code class="bg-white/10 text-orange-300 font-mono text-[10.5px] px-1.5 py-0.5 rounded border border-white/5">$1</code>');
+
+    // 3. Process the text line-by-line to parse block-level structures
+    const lines = html.split('\n');
+    let processedLines: string[] = [];
+
+    for (let i = 0; i < lines.length; i++) {
+      let line = lines[i];
+
+      // A. Parse Headings (e.g., ### Heading, ## Heading, # Heading)
+      if (line.startsWith('### ')) {
+        line = `<h4 class="font-bold text-white text-xs mt-3 mb-1 uppercase tracking-wider">${line.substring(4)}</h4>`;
+      } else if (line.startsWith('## ')) {
+        line = `<h3 class="font-bold text-white text-sm mt-4 mb-2 border-b border-white/5 pb-1">${line.substring(3)}</h3>`;
+      } else if (line.startsWith('# ')) {
+        line = `<h2 class="font-extrabold text-white text-base mt-4 mb-2 border-b border-white/5 pb-1">${line.substring(2)}</h2>`;
+      }
+
+      // B. Parse Bullet Lists (lines starting with "- " or "* ")
+      // We convert standard bullets into flex containers with custom amber bullet dots
+      const isBullet = line.trim().startsWith('- ') || line.trim().startsWith('* ');
+      if (isBullet) {
+        const content = line.replace(/^\s*[-*]\s+/, '');
+        line = `<div class="flex items-start gap-2 my-1.5 pl-2">
+                  <span class="text-branin-orange mt-1.5 shrink-0 select-none text-[8px]">●</span>
+                  <span class="text-slate-300">${content}</span>
+                </div>`;
+      }
+
+      processedLines.push(line);
+    }
+
+    html = processedLines.join('\n');
+
+    // 4. Parse inline bold elements: **text** -> vibrant branding amber bold
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-[#e17233]">$1</strong>');
+
+    return html;
+  }
 
 </script>
 
@@ -149,7 +179,7 @@
         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
         <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
       </span>
-      <span>CEREBRAS CORE ACTIVE</span>
+      <span>Spur Customer Agent</span>
     </div>
     <div class="flex items-center gap-2">
       <button on:click={resetSession} title="Reset Logs" class="p-1 hover:bg-white/5 text-slate-400 hover:text-white rounded">
@@ -173,7 +203,7 @@
             ? 'bg-branin-orange text-white rounded-tr-none' 
             : 'bg-white/[0.03] text-slate-200 border border-white/5 rounded-tl-none'}"
         >
-         {@html formatMessageText(msg.text)}
+         {@html parseMarkdown(msg.text)}
         </div>
       </div>
     {/each}
