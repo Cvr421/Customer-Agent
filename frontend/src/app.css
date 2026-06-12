@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom keyframes for premium aesthetic match */
+@keyframes waveMotion {
+  to {
+    stroke-dashoffset: -400;
+  }
+}
+
+@keyframes pulseExpand {
+  0% {
+    transform: scale(0.65);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+}
+
+.animate-wave-line-1 {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: waveMotion 7s linear infinite;
+}
+
+.animate-wave-line-2 {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: waveMotion 10s linear infinite;
+}
+
+.animate-pulse-expand-1 {
+  transform-origin: 260px 150px;
+  animation: pulseExpand 2.2s ease-out infinite;
+}
+
+.animate-pulse-expand-2 {
+  transform-origin: 200px 220px;
+  animation: pulseExpand 2.8s ease-out infinite;
+}
+
+.animate-pulse-expand-3 {
+  transform-origin: 290px 270px;
+  animation: pulseExpand 3.4s ease-out infinite;
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <!-- Premium sans-serif font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;850&display=swap" rel="stylesheet">
+    
+    <!-- Fail-Safe CDN Backstop (Ensures perfect styling regardless of local Node environment configurations) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              branin: {
+                darkBg: '#090705',       // Deep obsidian charcoal-brown
+                amber: '#e17233',        // Pure glowing amber
+                orange: '#d95d2c',       // Heavy brand orange
+                darkOrange: '#160f0a',   // Base for card structures
+                bezel: '#181410',        // Display frame bezel color
+              }
+            },
+            fontFamily: {
+              sans: ['"Inter"', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    %sveltekit.head%
+  </head>
+  <body class="bg-[#120e0a] text-slate-100 overflow-x-hidden min-h-screen">
+    <div class="p-4 md:p-8 flex items-center justify-center min-h-screen">
+      <!-- 
+        ROUNDED OUTER DISPLAY BEZEL:
+        This replicates the exact screen-bezel container layout of the reference image.
+      -->
+      <div class="w-full max-w-7xl bg-branin-bezel p-3.5 rounded-[36px] shadow-[0_25px_80px_rgba(0,0,0,0.85)] border border-white/5 relative">
+        <div class="bg-branin-darkBg rounded-[26px] border border-white/5 relative overflow-hidden flex flex-col justify-between">
+          %sveltekit.body%
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
