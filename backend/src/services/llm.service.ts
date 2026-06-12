@@ -64,3 +64,14 @@ ${retrievedContext}
     throw new Error("Unable to complete prompt through Cerebras. Service may be congested or keys might be misconfigured.");
   }
 }
+export async function warmupCerebras(): Promise<void> {
+  if (!CONFIG.CEREBRAS_API_KEY) return;
+  try {
+    // Triggers DNS resolution, TCP handshake, and TLS negotiation.
+    // Reuses the standard Keep-Alive connection pool for subsequent client calls.
+    await cerebrasClient.models.list();
+    console.log("✅ [WARMUP] Cerebras API TCP/TLS connection established and kept alive.");
+  } catch (error) {
+    console.warn("⚠️ [WARMUP] Silent Cerebras socket warmup skipped/failed:", error);
+  }
+}

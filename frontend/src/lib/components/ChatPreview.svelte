@@ -11,6 +11,7 @@
   export let onClose: () => void;
 
   const API_BASE = import.meta.env.VITE_BACKEND_URL;
+  //  const API_BASE = 'http://localhost:4000/chat';
 
   // Demo Interactive Datasets (Matches assignment criteria)
   let messages: Message[] = [
