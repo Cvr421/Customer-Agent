@@ -10,7 +10,7 @@
   export let activeSession: boolean = false;
   export let onClose: () => void;
 
-  const API_BASE = 'http://localhost:4000/chat';
+  const API_BASE = 'https://customer-agent-uclw.onrender.com/chat';
 
   // Demo Interactive Datasets (Matches assignment criteria)
   let messages: Message[] = [
