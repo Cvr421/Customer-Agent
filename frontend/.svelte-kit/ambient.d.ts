@@ -38,6 +38,7 @@
  * The above values will be the same _even if_ different values for `ENVIRONMENT` or `PUBLIC_BASE_URL` are set at runtime, as they are statically replaced in your code with their build time values.
  */
 declare module '$env/static/private' {
+	export const VITE_BACKEND_URL: string;
 	export const GJS_DEBUG_TOPICS: string;
 	export const PYTHON_BASIC_REPL: string;
 	export const LESSOPEN: string;
@@ -239,6 +240,7 @@ declare module '$env/static/public' {
  */
 declare module '$env/dynamic/private' {
 	export const env: {
+		VITE_BACKEND_URL: string;
 		GJS_DEBUG_TOPICS: string;
 		PYTHON_BASIC_REPL: string;
 		LESSOPEN: string;

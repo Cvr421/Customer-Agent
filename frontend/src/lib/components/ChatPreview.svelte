@@ -10,7 +10,7 @@
   export let activeSession: boolean = false;
   export let onClose: () => void;
 
-  const API_BASE = 'https://customer-agent-uclw.onrender.com/chat';
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
 
   // Demo Interactive Datasets (Matches assignment criteria)
   let messages: Message[] = [
