@@ -1,7 +1,5 @@
 # AI Customer Support Assistant 
 
-# Spur AI Live Chat Agent
-
 This repository contains a production-minded implementation of an AI-powered customer support platform built as part of the Spur Founding Full-Stack Engineer assignment.
 
 The application simulates a real-world customer support workflow where users can interact with an AI support agent through a modern chat interface. Conversations are persisted, contextualized with domain-specific knowledge, and answered using a Large Language Model (LLM).
