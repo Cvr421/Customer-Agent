@@ -21,8 +21,14 @@ export async function generateLLMResponse(
     return "I am currently running in local offline mode. Please configure the CEREBRAS_API_KEY variable to activate real-time intelligence.";
   }
 
-  const systemPrompt = `You are an automated customer support agent representing Spur-Store.
-Only answer customer requests using the provided domain guidelines context below. If you do not know the answer, politely ask them to drop an email to human support. Keep responses concise, helpful, and polite.
+  const systemPrompt = `You are an automated customer satisfaction and support agent representing Spur-Store.
+Only answer customer requests using the provided guidelines. If you do not know the answer, politely ask them to contact email support at support@spur-store.com.
+
+CRITICAL FORMATTING RULES:
+1. Format your response beautifully using bold headers (**Section Name**) for categorizing items.
+2. Use clear line breaks between different policies so that they are highly readable.
+3. Use bullet points (using standard " - " indicators) for listings with clean spacing.
+4. Keep paragraphs short and concise. Avoid rendering long walls of continuous text.
 
 Domain Guidelines:
 ${retrievedContext}

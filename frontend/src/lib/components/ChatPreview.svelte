@@ -116,6 +116,28 @@
     ];
     globalError = null;
   }
+
+// A safe, lightweight parser to render bold text and list bullets cleanly
+  function formatMessageText(text: string): string {
+    if (!text) return '';
+    
+    // 1. Escape HTML entities to prevent XSS injection
+    let clean = text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    
+    // 2. Parse bold markers: **text** -> <strong>text</strong>
+    // We style the bold headers with our branding amber color to stand out elegantly.
+    clean = clean.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-white">$1</strong>');
+    
+    // 3. Highlight lists and policies: replace bullet dash characters with styled indicators
+    clean = clean.replace(/^ - /gm, ' • ');
+    
+    return clean;
+  }
+
+
 </script>
 
 <div class="bg-[#120c08]/95 border border-branin-orange/40 rounded-2xl p-5 shadow-[0_12px_45px_rgba(217,93,44,0.2)] backdrop-blur-md flex flex-col h-[460px] justify-between font-sans relative z-40">
@@ -151,7 +173,7 @@
             ? 'bg-branin-orange text-white rounded-tr-none' 
             : 'bg-white/[0.03] text-slate-200 border border-white/5 rounded-tl-none'}"
         >
-          {msg.text}
+         {@html formatMessageText(msg.text)}
         </div>
       </div>
     {/each}
